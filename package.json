@@ -1,0 +1,44 @@
+{
+  "name": "abdi-milki-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Abdi Milki's personal portfolio: React + Vite frontend, Express + MongoDB backend, and a secure admin dashboard.",
+  "author": "Abdi Milki",
+  "license": "UNLICENSED",
+  "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail -n api,web -c blue,cyan \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev:api": "npm run dev -w backend",
+    "dev:web": "npm run dev -w frontend",
+    "build": "npm run build -w frontend",
+    "start": "npm run start -w backend",
+    "db:local": "npm run db:local -w backend",
+    "setup:env": "npm run setup:env -w backend",
+    "seed": "npm run seed -w backend",
+    "seed:admin": "npm run seed:admin -w backend",
+    "test": "npm run test -w backend",
+    "lint": "npm run lint -w backend && npm run lint -w frontend",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "engines": {
+    "node": ">=22.22.0"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.7",
+    "prettier": "^3.10.1",
+    "prettier-plugin-tailwindcss": "^0.8.1"
+  },
+  "overrides": {
+    "minimatch": "^11.0.9"
+  },
+  "config": {
+    "mongodbMemoryServer": {
+      "disablePostinstall": "1"
+    }
+  }
+}
