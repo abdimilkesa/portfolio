@@ -22,6 +22,10 @@ export default defineConfig([
     },
   },
   {
+    files: ['src/{api,hooks,lib,content}/**/*.{js,jsx}'],
+    rules: { 'react-refresh/only-export-components': 'off' },
+  },
+  {
     files: ['vite.config.js', 'scripts/**/*.{js,mjs}'],
     languageOptions: { globals: globals.node },
   },

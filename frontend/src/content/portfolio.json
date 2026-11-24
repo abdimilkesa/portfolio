@@ -1,0 +1,139 @@
+{
+  "profile": {
+    "name": "Abdi Milki",
+    "title": "Software Engineering Student | Aspiring AI Engineer | Full-Stack Developer",
+    "statement": "I build intelligent digital experiences and explore how technology and Artificial Intelligence can solve real-world problems.",
+    "summary": "I'm a Software Engineering student at Jimma University, passionate about Artificial Intelligence, software development, and building innovative solutions that address real-world challenges.",
+    "biography": "I'm studying Software Engineering at Jimma University in Ethiopia. What draws me in is the path from a problem to a working idea: learning the tools, shaping the approach, and building software that can be used. Artificial Intelligence is the field I most want to grow into, because it offers a way to design systems that respond to real situations. I use software projects as practice in design, development, and problem solving. My aim is to build intelligent systems that matter beyond the screen, and I treat learning as part of the work.",
+    "mission": "My goal is to transform ideas into meaningful technology and use Artificial Intelligence to create solutions that make a difference.",
+    "university": "Jimma University",
+    "education": "Software Engineering, current student",
+    "location": "Ethiopia",
+    "currentFocus": "Software engineering studies, with time set aside for Artificial Intelligence, full-stack development, and turning ideas into working software.",
+    "careerGoal": "To become an AI engineer and full-stack developer who builds intelligent systems that help with real problems.",
+    "profileImage": "",
+    "cvUrl": "",
+    "socialLinks": {
+      "github": "",
+      "linkedin": "",
+      "x": "",
+      "email": ""
+    },
+    "interests": [
+      {
+        "title": "Artificial Intelligence",
+        "summary": "How software can take on tasks that usually need judgment, and where that is genuinely useful."
+      },
+      {
+        "title": "Machine Learning",
+        "summary": "Learning patterns from data, and the care it takes to use those patterns honestly."
+      },
+      {
+        "title": "AI Engineering",
+        "summary": "Turning an AI idea into software that can be built, tested, and maintained."
+      },
+      {
+        "title": "Full-Stack Development",
+        "summary": "Building the interface, the API, and the data layer as one working product."
+      },
+      {
+        "title": "Intelligent Applications",
+        "summary": "Software that uses AI inside a real workflow, not as decoration."
+      },
+      {
+        "title": "Innovative Problem Solving",
+        "summary": "Starting from a real problem and looking for a technical approach that fits it."
+      }
+    ]
+  },
+  "skills": [
+    { "name": "JavaScript", "category": "Programming Languages", "icon": "javascript", "displayOrder": 1 },
+    { "name": "TypeScript", "category": "Programming Languages", "icon": "typescript", "displayOrder": 2 },
+    { "name": "Python", "category": "Programming Languages", "icon": "python", "displayOrder": 3 },
+    { "name": "Java", "category": "Programming Languages", "icon": "java", "displayOrder": 4 },
+    { "name": "C++", "category": "Programming Languages", "icon": "cpp", "displayOrder": 5 },
+    { "name": "React.js", "category": "Frontend Development", "icon": "react", "displayOrder": 1 },
+    { "name": "HTML5", "category": "Frontend Development", "icon": "html5", "displayOrder": 2 },
+    { "name": "CSS3", "category": "Frontend Development", "icon": "css", "displayOrder": 3 },
+    { "name": "Tailwind CSS", "category": "Frontend Development", "icon": "tailwind", "displayOrder": 4 },
+    { "name": "Node.js", "category": "Backend Development", "icon": "node", "displayOrder": 1 },
+    { "name": "Express.js", "category": "Backend Development", "icon": "express", "displayOrder": 2 },
+    { "name": "REST APIs", "category": "Backend Development", "icon": "api", "displayOrder": 3 },
+    { "name": "MongoDB", "category": "Databases", "icon": "mongodb", "displayOrder": 1 },
+    { "name": "MySQL", "category": "Databases", "icon": "mysql", "displayOrder": 2 },
+    { "name": "PostgreSQL", "category": "Databases", "icon": "postgresql", "displayOrder": 3 },
+    { "name": "Artificial Intelligence", "category": "AI and Emerging Technologies", "icon": "brain", "displayOrder": 1 },
+    { "name": "Machine Learning", "category": "AI and Emerging Technologies", "icon": "cpu", "displayOrder": 2 },
+    { "name": "AI-powered applications", "category": "AI and Emerging Technologies", "icon": "sparkles", "displayOrder": 3 },
+    { "name": "AI API integration", "category": "AI and Emerging Technologies", "icon": "layers", "displayOrder": 4 }
+  ],
+  "projects": [
+    {
+      "title": "AI-Powered Application",
+      "slug": "ai-powered-application",
+      "description": "A project direction for an application that uses AI to help with a practical problem. This entry is a placeholder. It is not a completed or deployed product.",
+      "detailedDescription": "This page reserves a place for an AI-powered application. Nothing here should be read as a finished product, a public launch, or a live demo. The name, description, technologies, and links can be replaced from the admin dashboard once the work exists.",
+      "category": "AI & Machine Learning",
+      "technologies": ["Python", "Machine Learning"],
+      "thumbnail": "",
+      "gallery": [],
+      "githubUrl": "",
+      "liveDemoUrl": "",
+      "featured": true,
+      "status": "planned"
+    },
+    {
+      "title": "Full-Stack E-Commerce Platform",
+      "slug": "full-stack-ecommerce-platform",
+      "description": "A planned full-stack e-commerce platform. This entry marks the idea only. The store is not built or deployed.",
+      "detailedDescription": "This placeholder is for a future e-commerce platform covering a storefront, an API, and a database. There is no catalog, checkout, or public deployment to visit yet. Update this entry when the project is actually underway.",
+      "category": "Full-Stack Development",
+      "technologies": ["React.js", "Node.js", "MongoDB"],
+      "thumbnail": "",
+      "gallery": [],
+      "githubUrl": "",
+      "liveDemoUrl": "",
+      "featured": false,
+      "status": "planned"
+    },
+    {
+      "title": "Agricultural Marketplace",
+      "slug": "agricultural-marketplace",
+      "description": "A planned digital marketplace connected to agriculture. This is a direction for future work, not a finished platform.",
+      "detailedDescription": "This entry holds space for a marketplace where agricultural products or services could be listed and discovered. It does not describe a launched product, a user base, or a live website. Replace this copy when the project begins.",
+      "category": "Web Applications",
+      "technologies": ["JavaScript", "React.js", "REST APIs"],
+      "thumbnail": "",
+      "gallery": [],
+      "githubUrl": "",
+      "liveDemoUrl": "",
+      "featured": false,
+      "status": "planned"
+    },
+    {
+      "title": "Software Engineering Project",
+      "slug": "software-engineering-project",
+      "description": "A placeholder for another software engineering project. No outcome, release, or deployment is claimed here.",
+      "detailedDescription": "Use this entry for a future software engineering project, or replace it with work that is actually in progress. Until then, it is only a slot in the portfolio.",
+      "category": "Software Engineering",
+      "technologies": ["JavaScript", "Java"],
+      "thumbnail": "",
+      "gallery": [],
+      "githubUrl": "",
+      "liveDemoUrl": "",
+      "featured": false,
+      "status": "planned"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Software Engineering",
+      "organization": "Jimma University",
+      "description": "Currently a Software Engineering student. Enrollment dates and any hackathons, collaborations, competitions, workshops, or certifications can be added from the admin dashboard. None are listed here unless they are added.",
+      "type": "education",
+      "startDate": null,
+      "endDate": null,
+      "current": true
+    }
+  ]
+}

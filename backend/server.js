@@ -2,6 +2,8 @@ import { assertRuntimeConfig, env } from './config/env.js';
 import { connectDatabase, disconnectDatabase } from './config/db.js';
 import { createApp } from './app.js';
 import { logger } from './utils/logger.js';
+import { seedIfEmpty } from './scripts/seedContent.js';
+import { seedAdminFromEnv } from './scripts/seedAdmin.js';
 
 const SHUTDOWN_TIMEOUT_MS = 10_000;
 
@@ -10,6 +12,11 @@ async function start() {
 
   try {
     await connectDatabase(env.mongoUri);
+    const seeded = await seedIfEmpty();
+    if (seeded.length) logger.info(`Seeded empty collections: ${seeded.join(', ')}`);
+    const admin = await seedAdminFromEnv();
+    if (admin.created) logger.info(`Administrator ready for ${admin.email}`);
+    else if (admin.skipped) logger.info(admin.reason);
   } catch (error) {
     error.message = `Could not connect to MongoDB (${error.message}). Is it running? For local development you can start one with \`npm run db:local\`.`;
     throw error;
