@@ -2,6 +2,7 @@ import { LogOut } from 'lucide-react';
 import { NavLink, Navigate, Outlet, useNavigate } from 'react-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { api } from '../../api/client';
+import { ThemeToggle } from '../../components/ThemeToggle';
 import { useSession } from '../../hooks/useSession';
 
 const links = [
@@ -9,7 +10,8 @@ const links = [
   ['/admin/projects', 'Projects'],
   ['/admin/skills', 'Skills'],
   ['/admin/experience', 'Experience'],
-  ['/admin/profile', 'Profile'],
+  ['/admin/profile', 'Home & profile'],
+  ['/admin/account', 'Account'],
   ['/admin/messages', 'Messages'],
 ];
 
@@ -37,10 +39,13 @@ export function AdminShell() {
             <p className="font-display tracking-[0.18em]">AM</p>
             <p className="text-sm text-subtle">Admin</p>
           </div>
-          <button type="button" className="btn btn-ghost h-10 w-10 px-0" onClick={logout}>
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <button type="button" className="btn btn-ghost h-10 w-10 px-0" onClick={logout}>
             <span className="sr-only">Log out</span>
             <LogOut className="h-4 w-4" aria-hidden="true" />
-          </button>
+            </button>
+          </div>
         </div>
         <nav className="flex gap-1 overflow-x-auto px-3 pb-4 lg:flex-col" aria-label="Admin">
           {links.map(([to, label]) => (
@@ -49,7 +54,7 @@ export function AdminShell() {
               to={to}
               end={to === '/admin'}
               className={({ isActive }) =>
-                `rounded-xl px-3 py-2 text-sm whitespace-nowrap ${isActive ? 'bg-white/10 text-white' : 'text-muted hover:text-white'}`
+                `rounded-xl px-3 py-2 text-sm whitespace-nowrap ${isActive ? 'bg-elevated text-accent-strong' : 'text-muted hover:text-accent-strong'}`
               }
             >
               {label}

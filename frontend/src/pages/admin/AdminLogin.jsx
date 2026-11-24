@@ -25,8 +25,9 @@ export function AdminLogin() {
       await queryClient.invalidateQueries({ queryKey: ['me'] });
       navigate('/admin');
     } catch (err) {
+      const status = err?.response?.status;
       setError(
-        err?.response
+        status === 401
           ? errorMessage(err, 'The email or password is incorrect.')
           : 'The API is not running, so sign-in cannot be checked yet.',
       );

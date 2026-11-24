@@ -1,6 +1,9 @@
 {
   "profile": {
     "name": "Abdi Milki",
+    "greeting": "Hello, I'm Abdi Milki",
+    "headline": "Building Intelligent Digital Experiences.",
+    "headlineAccent": "Intelligent",
     "title": "Software Engineering Student | Aspiring AI Engineer | Full-Stack Developer",
     "statement": "I build intelligent digital experiences and explore how technology and Artificial Intelligence can solve real-world problems.",
     "summary": "I'm a Software Engineering student at Jimma University, passionate about Artificial Intelligence, software development, and building innovative solutions that address real-world challenges.",

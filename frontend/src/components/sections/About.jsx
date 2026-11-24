@@ -1,39 +1,53 @@
-import { Compass, GraduationCap, MapPin, Target } from 'lucide-react';
+import { Brain, GraduationCap, Layers, Target } from 'lucide-react';
 import { Reveal } from '../Reveal';
-import { SectionHeading } from '../SectionHeading';
 import { useProfile } from '../../hooks/usePortfolio';
+
+const cards = [
+  { icon: GraduationCap, label: 'Education', value: 'Jimma University' },
+  { icon: Brain, label: 'Main Interest', value: 'Artificial Intelligence' },
+  { icon: Layers, label: 'Development', value: 'Full-Stack Applications' },
+  { icon: Target, label: 'Career Goal', value: 'AI Engineer' },
+];
 
 export function About() {
   const { content: profile } = useProfile();
-  const cards = [
-    { icon: GraduationCap, label: 'Education', value: `${profile?.education || 'Software Engineering'} · ${profile?.university || 'Jimma University'}` },
-    { icon: Compass, label: 'Current focus', value: profile?.currentFocus },
-    { icon: Target, label: 'Career goal', value: profile?.careerGoal },
-    { icon: MapPin, label: 'Location', value: profile?.location || 'Ethiopia' },
-  ];
+  const university = profile?.university || 'Jimma University';
 
   return (
-    <section id="about" className="container-page py-24 sm:py-32">
-      <Reveal>
-        <SectionHeading index="01" eyebrow="About" title="Beyond the Code." />
-      </Reveal>
-      <div className="mt-12 grid items-start gap-10 lg:grid-cols-12">
-        <Reveal className="lg:col-span-7">
-          <p className="text-lg leading-relaxed text-muted">{profile?.biography}</p>
-          <blockquote className="font-display mt-8 border-l-2 border-accent pl-5 text-2xl leading-snug text-white">
-            {profile?.mission}
-          </blockquote>
+    <section id="about" className="bg-ink-deep py-24 sm:py-32">
+      <div className="container-page">
+        <Reveal>
+          <p className="eyebrow text-accent-strong">About</p>
+          <h2 className="font-display mt-4 text-4xl font-semibold tracking-tight text-navy sm:text-5xl">About Me</h2>
+          <p className="mt-4 max-w-2xl text-lg text-muted">Turning ideas into intelligent solutions.</p>
         </Reveal>
-        <div className="grid gap-3 sm:grid-cols-2 lg:col-span-5 lg:grid-cols-1">
-          {cards.map((card, index) => (
-            <Reveal key={card.label} delay={index * 0.05}>
-              <article className="panel rounded-3xl p-5">
-                <card.icon className="h-5 w-5 text-accent" aria-hidden="true" />
-                <h3 className="mt-4 text-sm text-subtle">{card.label}</h3>
-                <p className="mt-1 text-base text-white">{card.value}</p>
-              </article>
-            </Reveal>
-          ))}
+        <div className="mt-12 grid items-start gap-10 lg:grid-cols-12">
+          <Reveal className="space-y-5 text-lg leading-relaxed text-muted lg:col-span-7">
+            <p>
+              I'm {profile?.name || 'Abdi Milki'}, a Software Engineering student at {university} with a strong interest in Artificial Intelligence, full-stack development, and innovative technology.
+            </p>
+            <p>
+              I enjoy exploring new technologies, building practical applications, and developing solutions that can make a meaningful difference.
+            </p>
+            <p>
+              My long-term ambition is to become an AI Engineer and contribute to creating intelligent systems that address real-world challenges.
+            </p>
+          </Reveal>
+          <div className="grid gap-3 sm:grid-cols-2 lg:col-span-5">
+            {cards.map((card, index) => (
+              <Reveal key={card.label} delay={index * 0.05}>
+                <article className="panel h-full rounded-3xl p-5">
+                  <span className="grid h-11 w-11 place-items-center rounded-2xl bg-elevated text-accent-strong">
+                    <card.icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <h3 className="mt-4 text-sm text-subtle">{card.label}</h3>
+                  <p className="mt-1 text-base font-medium text-navy">
+                    {card.label === 'Education' ? university : card.value}
+                  </p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

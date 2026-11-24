@@ -29,3 +29,24 @@ export function logout(_req, res) {
 export function me(req, res) {
   res.json({ success: true, data: publicAdmin(req.admin) });
 }
+
+export async function updateAccount(req, res, next) {
+  const currentPassword = String(req.body.currentPassword || '');
+  const email = String(req.body.email || '').toLowerCase().trim();
+  const newPassword = String(req.body.newPassword || '');
+  const admin = await Admin.findById(req.admin._id).select('+password');
+  if (!admin) return next(ApiError.unauthorized());
+
+  const matches = await bcrypt.compare(currentPassword, admin.password);
+  if (!matches) return next(ApiError.unauthorized('The current password is incorrect.'));
+
+  if (email !== admin.email) {
+    const taken = await Admin.exists({ email });
+    if (taken) return next(ApiError.conflict('That email is already used.'));
+    admin.email = email;
+  }
+  if (newPassword) admin.password = await bcrypt.hash(newPassword, 12);
+  await admin.save();
+  setSessionCookie(res, signSession(admin));
+  res.json({ success: true, data: publicAdmin(admin) });
+}

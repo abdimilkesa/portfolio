@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getHealth } from '../controllers/healthController.js';
-import { login, logout, me } from '../controllers/authController.js';
+import { login, logout, me, updateAccount } from '../controllers/authController.js';
 import { getProfile, updateProfile, uploadCv, uploadPortrait } from '../controllers/profileController.js';
 import {
   createProject,
@@ -34,6 +34,7 @@ import {
   contactRules,
   experienceRules,
   idParam,
+  accountRules,
   loginRules,
   profileRules,
   projectRules,
@@ -49,6 +50,7 @@ router.get('/media/:id', streamMedia);
 router.post('/auth/login', loginLimiter, loginRules, validate, login);
 router.post('/auth/logout', logout);
 router.get('/auth/me', requireAuth, me);
+router.patch('/auth/account', requireAuth, accountRules, validate, updateAccount);
 
 router.get('/profile', getProfile);
 router.put('/profile', requireAuth, profileRules, validate, updateProfile);

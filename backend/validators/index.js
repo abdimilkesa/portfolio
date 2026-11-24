@@ -10,6 +10,19 @@ const optionalUrl = (field) =>
 const optionalDate = (field) =>
   body(field).optional({ values: 'falsy' }).isISO8601().withMessage('Enter a valid date.');
 
+export const accountRules = [
+  body('currentPassword')
+    .isString()
+    .isLength({ min: 12, max: 72 })
+    .withMessage('Enter your current password.'),
+  body('email').trim().isEmail().withMessage('Enter a valid email address.').isLength({ max: 200 }),
+  body('newPassword')
+    .optional({ values: 'falsy' })
+    .isString()
+    .isLength({ min: 12, max: 72 })
+    .withMessage('The new password must be 12 to 72 characters.'),
+];
+
 export const loginRules = [
   body('email').trim().isEmail().withMessage('Enter a valid email address.').isLength({ max: 200 }),
   body('password')
@@ -20,6 +33,9 @@ export const loginRules = [
 
 export const profileRules = [
   body('name').trim().isLength({ min: 2, max: 80 }).withMessage('Enter your name.'),
+  body('greeting').optional({ values: 'falsy' }).trim().isLength({ max: 80 }),
+  body('headline').optional({ values: 'falsy' }).trim().isLength({ max: 160 }),
+  body('headlineAccent').optional({ values: 'falsy' }).trim().isLength({ max: 40 }),
   body('title').trim().isLength({ min: 2, max: 160 }).withMessage('Enter a title.'),
   body('statement').optional({ values: 'falsy' }).trim().isLength({ max: 300 }),
   body('summary').optional({ values: 'falsy' }).trim().isLength({ max: 500 }),

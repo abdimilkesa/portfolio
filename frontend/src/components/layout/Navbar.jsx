@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
+import { ThemeToggle } from '../ThemeToggle';
 import { useProfile } from '../../hooks/usePortfolio';
 
 const links = [
@@ -64,10 +65,10 @@ export function Navbar() {
   const cv = profile?.cvUrl;
 
   return (
-    <header className={`sticky top-0 z-40 ${scrolled || open ? 'glass' : ''}`}>
+    <header className={`sticky top-0 z-40 border-b border-line bg-surface/90 backdrop-blur-md ${scrolled ? 'shadow-[0_8px_24px_-18px_rgba(15,23,42,0.35)]' : ''}`}>
       <div className="container-page flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="font-display text-lg font-semibold tracking-[0.18em]" aria-label="Abdi Milki, home">
-          AM
+        <Link to="/" className="font-display text-lg font-semibold text-navy" aria-label="Abdi Milki, home">
+          {profile?.name || 'Abdi Milki'}
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -76,8 +77,10 @@ export function Navbar() {
               key={id}
               href={hrefFor(pathname, id)}
               aria-current={pathname === '/' && active === id ? 'true' : undefined}
-              className={`rounded-full px-3 py-1.5 text-sm ${
-                pathname === '/' && active === id ? 'text-white' : 'text-muted hover:text-white'
+              className={`rounded-full px-3 py-1.5 text-sm transition ${
+                pathname === '/' && active === id
+                  ? 'bg-elevated text-accent-strong'
+                  : 'text-muted hover:text-accent-strong'
               }`}
             >
               {label}
@@ -91,14 +94,16 @@ export function Navbar() {
               Download CV
             </a>
           ) : null}
+          <ThemeToggle />
           <a className="btn btn-primary" href={hrefFor(pathname, 'contact')}>
             Contact
           </a>
         </div>
 
+        <ThemeToggle className="lg:hidden" />
         <button
           type="button"
-          className="btn btn-ghost h-11 w-11 px-0 lg:hidden"
+          className="grid h-11 w-11 place-items-center rounded-full border border-line bg-surface text-navy lg:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((value) => !value)}

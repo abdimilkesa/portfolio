@@ -3,7 +3,6 @@ import { Send } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 import { api, errorMessage, fieldErrors } from '../../api/client';
 import { Reveal } from '../Reveal';
-import { SectionHeading } from '../SectionHeading';
 import { SocialLinks } from '../SocialLinks';
 import { useProfile } from '../../hooks/usePortfolio';
 
@@ -53,13 +52,14 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="border-t border-line bg-surface/40 py-24 sm:py-32">
+    <section id="contact" className="bg-ink-deep py-24 sm:py-32">
       <div className="container-page grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <Reveal>
-          <SectionHeading index="06" eyebrow="Contact" title="Have an Idea? Let's Build Something." />
-          <p className="mt-4 max-w-md text-lg text-muted">
-            I'm always interested in connecting with people who are passionate about technology, innovation, and building meaningful solutions.
-          </p>
+          <p className="eyebrow text-accent-strong">Contact</p>
+          <h2 className="font-display mt-4 text-4xl font-semibold tracking-tight text-navy sm:text-5xl">
+            Let's Build Something Amazing Together.
+          </h2>
+          <p className="mt-4 max-w-md text-lg text-muted">Have an idea, project, or opportunity? I'd love to hear about it.</p>
           <SocialLinks className="mt-8" links={profile?.socialLinks} />
         </Reveal>
 
@@ -93,7 +93,7 @@ export function Contact() {
             ) : null}
             <button className="btn btn-primary mt-6" type="submit" disabled={mutation.isPending}>
               <Send className="h-4 w-4" aria-hidden="true" />
-              {mutation.isPending ? 'Sending…' : 'Send message'}
+              {mutation.isPending ? 'Sending…' : 'Send Message'}
             </button>
           </form>
         </Reveal>

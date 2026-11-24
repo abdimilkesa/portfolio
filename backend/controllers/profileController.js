@@ -4,6 +4,9 @@ import { removeMedia, storeDocument, storeImage } from '../services/media.js';
 
 const TEXT_FIELDS = [
   'name',
+  'greeting',
+  'headline',
+  'headlineAccent',
   'title',
   'statement',
   'summary',

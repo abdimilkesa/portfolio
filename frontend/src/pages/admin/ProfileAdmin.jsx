@@ -15,6 +15,9 @@ function profileForm(data) {
 
 const empty = {
   name: '',
+  greeting: '',
+  headline: '',
+  headlineAccent: '',
   title: '',
   statement: '',
   summary: '',
@@ -87,11 +90,18 @@ export function ProfileAdmin() {
         save.mutate();
       }}
     >
-      <h1 className="font-display text-4xl">Profile</h1>
+      <h1 className="font-display text-4xl">Home & profile</h1>
+      <p className="mt-2 text-muted">The name and portrait appear on the home page. Skills, projects, and timeline entries stay on their own pages.</p>
       <div className="mt-6 grid gap-4">
+        <Field label="Home greeting"><input className="input" {...text('greeting')} placeholder="Hello, I'm Abdi Milki" /></Field>
+        <Field label="Home headline"><input className="input" {...text('headline')} placeholder="Building Intelligent Digital Experiences." /></Field>
+        <Field label="Highlighted word"><input className="input" {...text('headlineAccent')} placeholder="Intelligent" /></Field>
+        <Field label="Home supporting line"><input className="input" {...text('title')} required /></Field>
+        <Field label="Home summary"><textarea className="input" {...text('summary')} /></Field>
+        <Field label="Home portrait">
+          <input className="input" type="file" accept="image/png,image/jpeg,image/webp" onChange={(event) => setPortrait(event.target.files?.[0] || null)} />
+        </Field>
         <Field label="Name"><input className="input" {...text('name')} required /></Field>
-        <Field label="Title"><input className="input" {...text('title')} required /></Field>
-        <Field label="Hero summary"><textarea className="input" {...text('summary')} /></Field>
         <Field label="Brand statement"><textarea className="input" {...text('statement')} /></Field>
         <Field label="Biography"><textarea className="input" {...text('biography')} required /></Field>
         <Field label="Mission"><textarea className="input" {...text('mission')} /></Field>
@@ -156,9 +166,6 @@ export function ProfileAdmin() {
             Add interest
           </button>
         </fieldset>
-        <Field label="Portrait image">
-          <input className="input" type="file" accept="image/png,image/jpeg,image/webp" onChange={(event) => setPortrait(event.target.files?.[0] || null)} />
-        </Field>
         <Field label="CV (PDF)">
           <input className="input" type="file" accept="application/pdf" onChange={(event) => setCv(event.target.files?.[0] || null)} />
         </Field>

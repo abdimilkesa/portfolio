@@ -21,6 +21,9 @@ const interestSchema = new mongoose.Schema(
 const profileSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true, maxlength: 80 },
+    greeting: { type: String, trim: true, maxlength: 80, default: '' },
+    headline: { type: String, trim: true, maxlength: 160, default: '' },
+    headlineAccent: { type: String, trim: true, maxlength: 40, default: '' },
     title: { type: String, required: true, trim: true, maxlength: 160 },
     statement: { type: String, trim: true, maxlength: 300, default: '' },
     summary: { type: String, trim: true, maxlength: 500, default: '' },

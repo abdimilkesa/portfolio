@@ -37,7 +37,7 @@ export function ProjectPage() {
 
   return (
     <article className="container-page py-16 sm:py-20">
-      <Link className="text-sm text-muted hover:text-white" to="/#projects">
+      <Link className="text-sm text-muted hover:text-fg" to="/#projects">
         ← All projects
       </Link>
       <div className="mt-6 flex flex-wrap gap-2">

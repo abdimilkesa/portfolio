@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MotionConfig } from 'framer-motion';
 import { createBrowserRouter, RouterProvider } from 'react-router';
+import { CustomCursor } from './components/CustomCursor';
 import { SiteLayout } from './components/layout/SiteLayout';
 import { HomePage } from './pages/HomePage';
 import { NotFound } from './pages/NotFound';
@@ -14,6 +15,7 @@ const ProjectsAdmin = lazy(() => import('./pages/admin/ProjectsAdmin.jsx').then(
 const SkillsAdmin = lazy(() => import('./pages/admin/SkillsAdmin.jsx').then((mod) => ({ default: mod.SkillsAdmin })));
 const ExperienceAdmin = lazy(() => import('./pages/admin/ExperienceAdmin.jsx').then((mod) => ({ default: mod.ExperienceAdmin })));
 const ProfileAdmin = lazy(() => import('./pages/admin/ProfileAdmin.jsx').then((mod) => ({ default: mod.ProfileAdmin })));
+const AccountAdmin = lazy(() => import('./pages/admin/AccountAdmin.jsx').then((mod) => ({ default: mod.AccountAdmin })));
 const MessagesAdmin = lazy(() => import('./pages/admin/MessagesAdmin.jsx').then((mod) => ({ default: mod.MessagesAdmin })));
 
 const queryClient = new QueryClient({
@@ -41,6 +43,7 @@ const router = createBrowserRouter([
       { path: 'skills', element: <SkillsAdmin /> },
       { path: 'experience', element: <ExperienceAdmin /> },
       { path: 'profile', element: <ProfileAdmin /> },
+      { path: 'account', element: <AccountAdmin /> },
       { path: 'messages', element: <MessagesAdmin /> },
     ],
   },
@@ -50,6 +53,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <MotionConfig reducedMotion="user">
+        <CustomCursor />
         <Suspense fallback={<p className="grid min-h-dvh place-items-center text-muted">Loading…</p>}>
           <RouterProvider router={router} />
         </Suspense>
