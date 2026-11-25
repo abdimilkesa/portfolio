@@ -1,9 +1,11 @@
+import { motion, useReducedMotion } from 'framer-motion';
 import { Reveal } from '../Reveal';
 import { TechIcon } from '../TechIcon';
 import { useSkills } from '../../hooks/usePortfolio';
 import { SKILL_CATEGORIES } from '../../lib/labels';
 
 export function Skills() {
+  const reduce = useReducedMotion();
   const { content: skills } = useSkills();
   const known = new Set(skills.map((skill) => skill.category));
   const categories = [
@@ -24,7 +26,7 @@ export function Skills() {
         <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {categories.map((category, index) => (
             <Reveal key={category} delay={index * 0.04}>
-              <article className="panel h-full rounded-3xl p-5">
+              <motion.article whileHover={reduce ? undefined : { y: -4 }} className="panel h-full rounded-3xl p-5">
                 <h3 className="font-display text-lg text-navy">{category}</h3>
                 <ul className="mt-4 grid grid-cols-1 gap-2">
                   {skills
@@ -41,7 +43,7 @@ export function Skills() {
                       </li>
                     ))}
                 </ul>
-              </article>
+              </motion.article>
             </Reveal>
           ))}
         </div>

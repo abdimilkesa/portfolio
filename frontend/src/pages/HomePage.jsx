@@ -7,13 +7,13 @@ import { Skills } from '../components/sections/Skills';
 
 export function HomePage() {
   return (
-    <>
+    <div className="kinetic-page">
       <Hero />
       <About />
       <Skills />
       <Projects />
       <Experience />
       <Contact />
-    </>
+    </div>
   );
 }

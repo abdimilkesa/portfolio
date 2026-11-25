@@ -1,4 +1,5 @@
 import { Brain, GraduationCap, Layers, Target } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Reveal } from '../Reveal';
 import { useProfile } from '../../hooks/usePortfolio';
 
@@ -10,6 +11,7 @@ const cards = [
 ];
 
 export function About() {
+  const reduce = useReducedMotion();
   const { content: profile } = useProfile();
   const university = profile?.university || 'Jimma University';
 
@@ -36,7 +38,7 @@ export function About() {
           <div className="grid gap-3 sm:grid-cols-2 lg:col-span-5">
             {cards.map((card, index) => (
               <Reveal key={card.label} delay={index * 0.05}>
-                <article className="panel h-full rounded-3xl p-5">
+                <motion.article whileHover={reduce ? undefined : { y: -4 }} className="panel h-full rounded-3xl p-5">
                   <span className="grid h-11 w-11 place-items-center rounded-2xl bg-elevated text-accent-strong">
                     <card.icon className="h-5 w-5" aria-hidden="true" />
                   </span>
@@ -44,7 +46,7 @@ export function About() {
                   <p className="mt-1 text-base font-medium text-navy">
                     {card.label === 'Education' ? university : card.value}
                   </p>
-                </article>
+                </motion.article>
               </Reveal>
             ))}
           </div>

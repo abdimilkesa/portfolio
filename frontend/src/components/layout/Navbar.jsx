@@ -25,10 +25,15 @@ export function Navbar() {
   const [active, setActive] = useState('home');
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      const hero = pathname === '/' ? document.getElementById('home') : null;
+      const limit = hero ? Math.max(80, hero.offsetHeight - 80) : 12;
+      setScrolled(window.scrollY > limit);
+    };
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (pathname !== '/') return undefined;
@@ -63,12 +68,21 @@ export function Navbar() {
   }, [open]);
 
   const cv = profile?.cvUrl;
+  const overIntro = pathname === '/' && !scrolled;
 
   return (
-    <header className={`sticky top-0 z-40 border-b border-line bg-surface/90 backdrop-blur-md ${scrolled ? 'shadow-[0_8px_24px_-18px_rgba(15,23,42,0.35)]' : ''}`}>
-      <div className="container-page flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="font-display text-lg font-semibold text-navy" aria-label="Abdi Milki, home">
-          {profile?.name || 'Abdi Milki'}
+    <header className="sticky top-3 z-40 px-4 sm:px-6">
+      <div
+        className={`mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 rounded-2xl border px-4 backdrop-blur-2xl sm:px-6 ${
+          overIntro
+            ? 'border-white/10 bg-[#0B1120]/75 text-white shadow-xl shadow-black/40'
+            : 'border-line bg-surface/85 text-navy shadow-xl'
+        }`}
+      >
+        <Link to="/" className={`font-code text-lg font-extrabold tracking-tight ${overIntro ? 'text-white' : 'text-navy'}`} aria-label="Abdi Milki, home">
+          <span className="mr-2 inline-grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-emerald-400 via-teal-400 to-sky-500 text-base font-black text-slate-950">A.</span>
+          {(profile?.name || 'Abdi').split(' ')[0]}
+          <span className="text-emerald-400">.dev</span>
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
@@ -79,8 +93,12 @@ export function Navbar() {
               aria-current={pathname === '/' && active === id ? 'true' : undefined}
               className={`rounded-full px-3 py-1.5 text-sm transition ${
                 pathname === '/' && active === id
-                  ? 'bg-elevated text-accent-strong'
-                  : 'text-muted hover:text-accent-strong'
+                  ? overIntro
+                    ? 'bg-emerald-500/15 text-emerald-300'
+                    : 'bg-elevated text-accent-strong'
+                  : overIntro
+                    ? 'text-slate-300 hover:text-white'
+                    : 'text-muted hover:text-accent-strong'
               }`}
             >
               {label}
@@ -103,7 +121,7 @@ export function Navbar() {
         <ThemeToggle className="lg:hidden" />
         <button
           type="button"
-          className="grid h-11 w-11 place-items-center rounded-full border border-line bg-surface text-navy lg:hidden"
+          className={`grid h-11 w-11 place-items-center rounded-full border lg:hidden ${overIntro ? 'border-white/20 bg-white/10 text-white' : 'border-line bg-surface text-navy'}`}
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((value) => !value)}

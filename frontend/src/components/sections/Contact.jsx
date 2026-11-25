@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { api, errorMessage, fieldErrors } from '../../api/client';
 import { Reveal } from '../Reveal';
 import { SocialLinks } from '../SocialLinks';
+import { Magnetic } from '../motion/Kinetic';
 import { useProfile } from '../../hooks/usePortfolio';
 
 const empty = { name: '', email: '', subject: '', message: '', company: '' };
@@ -91,10 +92,12 @@ export function Contact() {
                 Message received. I'll read it from the admin dashboard.
               </p>
             ) : null}
-            <button className="btn btn-primary mt-6" type="submit" disabled={mutation.isPending}>
-              <Send className="h-4 w-4" aria-hidden="true" />
-              {mutation.isPending ? 'Sending…' : 'Send Message'}
-            </button>
+            <Magnetic>
+              <button className="btn btn-primary mt-6" type="submit" disabled={mutation.isPending}>
+                <Send className="h-4 w-4" aria-hidden="true" />
+                {mutation.isPending ? 'Sending…' : 'Send Message'}
+              </button>
+            </Magnetic>
           </form>
         </Reveal>
       </div>

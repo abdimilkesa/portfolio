@@ -1,8 +1,10 @@
+import { motion, useReducedMotion } from 'framer-motion';
 import { Reveal } from '../Reveal';
 import { useExperience, useProfile } from '../../hooks/usePortfolio';
 import { EXPERIENCE_LABEL, experiencePeriod } from '../../lib/labels';
 
 export function Experience() {
+  const reduce = useReducedMotion();
   const { content: entries } = useExperience();
   const { content: profile } = useProfile();
   const interests = profile?.interests || [];
@@ -21,14 +23,14 @@ export function Experience() {
         <ol className="relative mt-12 space-y-6 border-l border-accent/30 pl-8">
           {entries.map((entry, index) => (
             <Reveal key={entry._id || `${entry.organization}-${entry.title}`} delay={index * 0.05}>
-              <li className="panel relative rounded-3xl p-6">
+              <motion.li whileHover={reduce ? undefined : { y: -3 }} className="panel relative rounded-3xl p-6">
                 <span className="absolute top-8 -left-[2.4rem] h-3.5 w-3.5 rounded-full border-2 border-surface bg-accent-strong shadow-[0_0_0_4px_var(--color-elevated)]" />
                 <p className="text-sm font-medium text-accent-strong">{EXPERIENCE_LABEL[entry.type] || entry.type}</p>
                 <p className="mt-1 text-sm text-subtle">{experiencePeriod(entry)}</p>
                 <h3 className="font-display mt-3 text-2xl text-navy">{entry.title}</h3>
                 <p className="mt-1 text-muted">{entry.organization}</p>
                 {entry.description ? <p className="mt-3 max-w-2xl text-muted">{entry.description}</p> : null}
-              </li>
+              </motion.li>
             </Reveal>
           ))}
         </ol>

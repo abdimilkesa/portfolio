@@ -1,67 +1,88 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { Typewriter } from '../Typewriter';
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'framer-motion';
 import { useProfile } from '../../hooks/usePortfolio';
+import { startPortraitIntro } from '../intro/portraitIntro';
 
-const roles = [
-  'AI Engineer',
-  'Full-Stack Developer',
-  'Software Engineer',
-  'AI Enthusiast',
-  'Problem Solver',
-  'Technology Innovator',
-];
+const ROLE = 'AI Engineer & Software Developer';
 
 export function Hero() {
-  const { content: profile } = useProfile();
   const reduce = useReducedMotion();
-  const portrait = profile?.profileImage;
-  const name = profile?.name || 'Abdi Milki';
+  const { content: profile } = useProfile();
+  const name = (profile?.name || 'Abdi Milki').toUpperCase();
+  const imageUrl = profile?.profileImage || '';
+  const rootRef = useRef(null);
+  const waterRef = useRef(null);
+  const fxRef = useRef(null);
+  const photoRef = useRef(null);
+  const nameRef = useRef(null);
+  const roleRef = useRef(null);
+  const wrapRef = useRef(null);
+  const portraitRef = useRef(null);
+  const apiRef = useRef(null);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return undefined;
+    let dead = false;
+    let api = null;
+    startPortraitIntro({
+      root,
+      waterCanvas: waterRef.current,
+      fxCanvas: fxRef.current,
+      photoCanvas: photoRef.current,
+      nameEl: nameRef.current,
+      roleEl: roleRef.current,
+      wrapEl: wrapRef.current,
+      portraitEl: portraitRef.current,
+      name,
+      role: ROLE,
+      imageUrl,
+      reduced: Boolean(reduce),
+    }).then((handle) => {
+      if (dead) handle.destroy();
+      else api = handle;
+      apiRef.current = dead ? null : handle;
+    });
+    return () => {
+      dead = true;
+      api?.destroy();
+      apiRef.current?.destroy();
+      apiRef.current = null;
+    };
+  }, [imageUrl, name, reduce]);
 
   return (
-    <section id="home" className="relative isolate overflow-hidden bg-ink">
-      <div className="bg-grid fade-radial pointer-events-none absolute inset-0" />
-      <div className="pointer-events-none absolute -top-24 left-[8%] h-72 w-72 rounded-full bg-[#60A5FA]/25 blur-3xl animate-drift" />
-      <div className="pointer-events-none absolute right-[-3rem] bottom-0 h-80 w-80 rounded-full bg-[#2563EB]/10 blur-3xl animate-drift-reverse" />
-      <div className="pointer-events-none absolute top-28 right-[14%] hidden h-16 w-16 rounded-2xl border border-accent/40 bg-elevated/80 animate-float lg:block" />
-      <div className="pointer-events-none absolute bottom-28 left-[8%] hidden h-10 w-10 rounded-full border border-[#93C5FD] animate-float-slow lg:block" />
-
-      <div className="container-page grid min-h-[calc(100dvh-4rem)] items-center gap-14 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
-        <div>
-          <p className="eyebrow text-accent-strong">Hello, I'm</p>
-          <h1 className="font-display mt-4 text-5xl font-semibold tracking-tight text-navy sm:text-7xl">{name}.</h1>
-          <p className="font-display mt-6 text-2xl text-fg sm:text-3xl">I'm a passionate</p>
-          <p className="font-display mt-1 text-[clamp(1.7rem,7vw,3.15rem)] leading-tight font-semibold">
-            <Typewriter words={roles} />
-          </p>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-            I'm a Software Engineering student at Jimma University, passionate about building intelligent systems, developing modern applications, and using technology to solve real-world problems.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a className="btn btn-primary" href="#projects">
-              Explore My Projects
+    <section id="home" ref={rootRef} className="cine" aria-label="Introduction">
+      <canvas ref={waterRef} className="cine-water" aria-hidden="true" />
+      <canvas ref={fxRef} className="cine-fx" aria-hidden="true" />
+      <div className="cine-vignette" aria-hidden="true" />
+      <div className="cine-grid">
+        <div className="cine-copy">
+          <h1 ref={nameRef} className="cine-name" aria-label={name} />
+          <h2 ref={roleRef} className="cine-role" aria-label={ROLE} />
+          <p className="cine-sub cine-late">Software Engineering Student at Jimma University</p>
+          <div className="cine-cta cine-late" style={{ '--d': '.2s' }}>
+            <a className="cine-btn cine-primary" href="#projects">
+              View My Work
             </a>
-            <a className="btn btn-ghost" href="#contact">
-              Let's Connect
+            <a className="cine-btn cine-glass" href="#contact">
+              Contact Me
             </a>
           </div>
         </div>
-
-        <motion.div
-          className="relative mx-auto w-full max-w-md"
-          animate={reduce ? undefined : { y: [0, -12, 0] }}
-          transition={reduce ? undefined : { duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <div className="absolute inset-8 rounded-full bg-[#60A5FA]/30 blur-3xl" />
-          <div className="relative aspect-square overflow-hidden rounded-full border-[6px] border-surface bg-elevated shadow-[0_24px_60px_-24px_rgba(37,99,235,0.55)] ring-8 ring-elevated">
-            {portrait ? (
-              <img src={portrait} alt={`Portrait of ${name}`} className="h-full w-full object-cover" />
-            ) : (
-              <div className="grid h-full place-items-center">
-                <p className="font-display text-6xl font-semibold tracking-[0.12em] text-gradient">AM</p>
-              </div>
-            )}
+        <div ref={wrapRef} className="cine-pwrap">
+          <div ref={portraitRef} className="cine-portrait">
+            <canvas ref={photoRef} role="img" aria-label={`Portrait of ${profile?.name || 'Abdi Milki'}`} />
           </div>
-        </motion.div>
+        </div>
+      </div>
+      <div className="cine-ctrl">
+        <button type="button" onClick={() => apiRef.current?.skip()}>
+          Skip intro
+        </button>
+        <button type="button" onClick={() => apiRef.current?.replay()}>
+          Replay
+        </button>
       </div>
     </section>
   );

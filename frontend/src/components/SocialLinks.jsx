@@ -13,13 +13,18 @@ function hrefFor(key, value) {
   return key === 'email' ? `mailto:${value}` : value;
 }
 
-export function SocialLinks({ links, className = '' }) {
+export function SocialLinks({ links, className = '', variant = 'default' }) {
+  const glass = variant === 'glass';
   const available = items
     .map((item) => ({ ...item, href: hrefFor(item.key, links?.[item.key]) }))
     .filter((item) => item.href);
 
   if (!available.length) {
-    return <p className={`text-sm text-subtle ${className}`}>Social profiles can be added from the admin profile.</p>;
+    return (
+      <p className={`text-sm ${glass ? 'text-white/75' : 'text-subtle'} ${className}`}>
+        Social profiles can be added from the admin profile.
+      </p>
+    );
   }
 
   return (
@@ -28,7 +33,7 @@ export function SocialLinks({ links, className = '' }) {
         <li key={item.key}>
           <a
             href={item.href}
-            className="btn btn-ghost h-11 w-11 px-0"
+            className={glass ? 'intro-btn intro-btn-glass h-11 w-11 px-0' : 'btn btn-ghost h-11 w-11 px-0'}
             {...(item.key === 'email' ? {} : { target: '_blank', rel: 'noreferrer' })}
           >
             <span className="sr-only">{item.label}</span>

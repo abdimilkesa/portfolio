@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router';
 import { ProjectArt } from '../ProjectArt';
 import { Reveal } from '../Reveal';
+import { TiltCard } from '../motion/Kinetic';
 import { useProjects } from '../../hooks/usePortfolio';
 import { PROJECT_CATEGORIES, STATUS_LABEL } from '../../lib/labels';
 
 function ProjectCard({ project, featured = false }) {
   return (
-    <article data-cursor="project" className={`panel group flex h-full flex-col overflow-hidden rounded-[1.7rem] ${featured ? 'lg:grid lg:grid-cols-[1.15fr_0.85fr]' : ''}`}>
+    <TiltCard className={featured ? 'md:col-span-2' : ''}>
+      <article data-cursor="project" className={`panel group relative flex h-full flex-col overflow-hidden rounded-[1.5rem] ${featured ? 'lg:grid lg:grid-cols-[1.15fr_0.85fr]' : ''}`}>
       <Link to={`/projects/${project.slug}`} className="block overflow-hidden">
         {project.thumbnail ? (
           <img src={project.thumbnail} alt="" className="aspect-[16/10] w-full object-cover transition duration-500 group-hover:scale-[1.03]" />
@@ -50,8 +53,9 @@ function ProjectCard({ project, featured = false }) {
             </a>
           ) : null}
         </div>
-      </div>
-    </article>
+        </div>
+      </article>
+    </TiltCard>
   );
 }
 
@@ -73,18 +77,28 @@ export function Projects() {
           <p className="mt-4 max-w-2xl text-lg text-muted">Some things I've been building.</p>
         </Reveal>
 
-        <div className="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filter projects">
-          {categories.map((item) => (
-            <button
-              key={item}
-              type="button"
-              aria-pressed={category === item}
-              className={`btn ${category === item ? 'btn-primary' : 'btn-ghost'}`}
-              onClick={() => setCategory(item)}
-            >
-              {item}
-            </button>
-          ))}
+        <div className="mt-8 inline-flex flex-wrap gap-1.5 rounded-2xl border border-white/10 bg-slate-950/80 p-1.5" role="group" aria-label="Filter projects">
+          {categories.map((item) => {
+            const selected = category === item;
+            return (
+              <button
+                key={item}
+                type="button"
+                aria-pressed={selected}
+                className={`relative rounded-xl px-3.5 py-2 text-xs font-bold ${selected ? 'text-slate-950' : 'text-slate-300 hover:text-white'}`}
+                onClick={() => setCategory(item)}
+              >
+                {selected ? (
+                  <motion.span
+                    layoutId="projectFilterPill"
+                    className="absolute inset-0 rounded-xl bg-emerald-400"
+                    transition={{ type: 'spring', stiffness: 360, damping: 28 }}
+                  />
+                ) : null}
+                <span className="relative z-10">{item}</span>
+              </button>
+            );
+          })}
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2">
